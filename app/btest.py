@@ -25,14 +25,16 @@ def test():
                 user.good_question += 1
                 db.session.commit()
                 buttongreen = buttonnum
-                flash('Вы ответили верно . Всего ответов:{}, верных ответов:{}, неверных ответов:{}' \
-                      .format(user.total_question, user.good_question, user.fail_question))
+                # flash('Вы ответили верно . Всего ответов:{}, верных ответов:{}, неверных ответов:{}' \
+                #       .format(user.total_question, user.good_question, user.fail_question))
             else:
                 user.fail_question += 1
                 db.session.commit()
                 buttonred = buttonnum
-                flash('Вы ответили не верно . Всего ответов:{}, верных ответов:{}, неверных ответов:{}' \
-                      .format(user.total_question, user.good_question, user.fail_question))
+                buttongreen = question.findansw()
+
+                # flash('Вы ответили не верно . Всего ответов:{}, верных ответов:{}, неверных ответов:{}' \
+                #       .format(user.total_question, user.good_question, user.fail_question))
             buttonnext = True
         elif request.values.get('nextQuest') == 'next':
             question = Question.query.filter_by(id=int(request.values.get('id')) + 1).first()

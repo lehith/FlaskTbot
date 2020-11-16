@@ -2,49 +2,68 @@
 
 {% block app_content %}
     <h3>Вопрос:{{ question.id }}</h3>
-    <h4>{{ question.question_text }}</h4>
-
-
-    <div class="row">
-        {% for button in buttons %}
-        <div class="col-lg-2">
-            <form action="{{ url_for('test.test') }}" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="answer" value="{{ button.ans }}"/>
-                <input type="hidden" name="id" value="{{ question.id }}"/>
-                <input type="hidden" name="button" value="{{ button.id }}"/>
-                {% if button.color == "green" %}
-                    <button type="submit" class="btn btn-success btn-lg">{{ button.ans }}</button>
-                {% elif button.color == "red"  %}
-                    <button type="submit" class="btn btn-danger btn-lg">{{ button.ans }}</button>
-                {% else %}
-                    <button type="submit" class="btn btn-primary btn-lg">{{ button.ans }}</button>
-                {% endif %}
-            </form>
-        </div>
-      {% endfor %}
-
-    </div>
-
+    <p class="lead">{{ question.question_text }}</p>
     <br>
     {% if buttonnext %}
         <div class="row">
-            <div class="col-lg-4">
-                <form action="{{ url_for('test.test') }}" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="nextQuest" value="next"/>
-                    <input type="hidden" name="id" value="{{ question.id }}"/>
-                    <button type="submit" class="btn btn-primary btn-lg">Следуюший вопрос</button>
-                </form>
-            </div>
-            <div class="col-lg-2">
-                <form action="{{ url_for('test.test') }}" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="nextQuest" value="random"/>
-                    <input type="hidden" name="id" value="{{ question.id }}"/>
-                    <button type="submit" class="btn btn-primary btn-lg">Случайный вопрос</button>
-                </form>
-            </div>
+            {% for button in buttons %}
+                <div class="col-xs-2 col-md-2">
+                    <form action="{{ url_for('test.test') }}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="answer" value="{{ button.ans }}"/>
+                        <input type="hidden" name="id" value="{{ question.id }}"/>
+                        <input type="hidden" name="button" value="{{ button.id }}"/>
+                        {% if button.color == "green" %}
+                            <button type="submit" class="btn btn-success btn-lg"
+                                    disabled="disabled">{{ button.ans }}</button>
+                        {% elif button.color == "red" %}
+                            <button type="submit" class="btn btn-danger btn-lg"
+                                    disabled="disabled">{{ button.ans }}</button>
+                        {% else %}
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                    disabled="disabled">{{ button.ans }}</button>
+                        {% endif %}
+                    </form>
+                </div>
+            {% endfor %}
         </div>
-
+    {% else %}
+        <div class="row">
+            {% for button in buttons %}
+                <div class="col-xs-2 col-md-2">
+                    <form action="{{ url_for('test.test') }}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="answer" value="{{ button.ans }}"/>
+                        <input type="hidden" name="id" value="{{ question.id }}"/>
+                        <input type="hidden" name="button" value="{{ button.id }}"/>
+                        {% if button.color == "green" %}
+                            <button type="submit" class="btn btn-success btn-lg">{{ button.ans }}</button>
+                        {% elif button.color == "red" %}
+                            <button type="submit" class="btn btn-danger btn-lg">{{ button.ans }}</button>
+                        {% else %}
+                            <button type="submit" class="btn btn-primary btn-lg">{{ button.ans }}</button>
+                        {% endif %}
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
+    <br>
+
+
+    <form action="{{ url_for('test.test') }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="nextQuest" value="next"/>
+        <input type="hidden" name="id" value="{{ question.id }}"/>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Следуюший вопрос</button>
+    </form>
+    <br>
+    <form action="{{ url_for('test.test') }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="nextQuest" value="random"/>
+        <input type="hidden" name="id" value="{{ question.id }}"/>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Случайный вопрос</button>
+    </form>
+
+
+
+
 
 
 {% endblock %}

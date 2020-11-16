@@ -8,7 +8,8 @@ from app import login
 def load_user(id):
     return User.query.get(int(id))
 
-class User(UserMixin,db.Model):
+
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), unique=True)
@@ -25,8 +26,6 @@ class User(UserMixin,db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-
-
 
 
 class Question(db.Model):
@@ -48,3 +47,19 @@ class Question(db.Model):
             return True
         else:
             return False
+
+    def findansw(self):
+        if str(self.question_answer) == str(self.question_answer_varian1):
+            return 0
+        elif str(self.question_answer) == str(self.question_answer_varian2):
+            return 1
+        elif str(self.question_answer) == str(self.question_answer_varian3):
+            return 2
+        elif str(self.question_answer) == str(self.question_answer_varian4):
+            return 3
+        elif str(self.question_answer) == str(self.question_answer_varian5):
+            return 4
+        elif str(self.question_answer) == str(self.question_answer_varian6):
+            return 5
+        else:
+            return 10
