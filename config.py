@@ -2,7 +2,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-TOKEN_TELEGRAM = '1095386139:AAEuGsPPy8kcPFMt2gfXSHV-vgFUzGSdl-Q'
+TOKEN_TELEGRAM = os.environ.get('TOKEN_TELEGRAM') or '1095386139:AAEuGsPPy8kcPFMt2gfXSHV-vgFUzGSdl-Q'
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
