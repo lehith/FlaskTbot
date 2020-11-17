@@ -10,6 +10,7 @@
         </tr>
         </thead>
         <tbody>
+        {% if questions %}
         {% for question in questions %}
 
             <tr>
@@ -18,6 +19,17 @@
                 <td>{{ question.question_answer }}</td>
             </tr>
         {% endfor %}
+        {% endif %}
+                {% if question %}
+
+            <tr>
+                <th scope="row">{{ question.id }}</th>
+                <td>{{ question.question_text }}</td>
+                <td>{{ question.question_answer }}</td>
+            </tr>
+
+        {% endif %}
+
         </tbody>
     </table>
 

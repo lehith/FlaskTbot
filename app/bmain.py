@@ -23,6 +23,15 @@ def question():
     questions = Question.query.order_by(Question.id.asc()).all()
     return render_template('question.html', title='question', questions=questions)
 
+@bpmain.route('/question/<id>')
+@login_required
+def questionid(id):
+    question = Question.query.filter_by(id=int(id)).first_or_404()
+    return render_template('question.html', title='question', question=question)
+
+
+
+
 
 @bpmain.route('/statistic')
 @login_required
